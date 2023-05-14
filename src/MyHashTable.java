@@ -125,4 +125,9 @@ public class MyHashTable<K, V> {
     public int getNumBuckets(){
         return numBuckets;
     }
+
+    public int getSize(int index) {
+        LinkedList<HashNode<K, V>> bucketList = bucketArray.get(index);
+        return bucketList.size();
+    }
 }
