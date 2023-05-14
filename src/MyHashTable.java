@@ -86,4 +86,20 @@ public class MyHashTable<K, V> {
         // if the key is not found, return null
         return null;
     }
+    public V remove(K key) {
+        int bucketIndex = hash(key);
+        LinkedList<HashNode<K, V>> bucketList = bucketArray.get(bucketIndex);
+
+        // iterate over the linked list in the appropriate bucket
+        for (HashNode<K, V> node : bucketList) {
+            // if the key is found, remove the node and return its corresponding value
+            if (node.key.equals(key)) {
+                bucketList.remove(node);
+                size--;
+                return node.value;
+            }
+        }
+        // if the key is not found, return null
+        return null;
+    }
 }
