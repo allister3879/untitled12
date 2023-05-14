@@ -122,5 +122,7 @@ public class MyHashTable<K, V> {
         }
         return null;
     }
-
+    public int getNumBuckets(){
+        return numBuckets;
+    }
 }
