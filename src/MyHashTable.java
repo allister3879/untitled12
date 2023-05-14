@@ -112,5 +112,15 @@ public class MyHashTable<K, V> {
         }
         return false;
     }
+    public K getKey(V value) {
+        for (LinkedList<HashNode<K, V>> bucketList : bucketArray) {
+            for (HashNode<K, V> node : bucketList) {
+                if (node.value.equals(value)) {
+                    return node.key;
+                }
+            }
+        }
+        return null;
+    }
 
 }
