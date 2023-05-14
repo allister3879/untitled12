@@ -48,6 +48,26 @@ public class MyHashTable<K, V> {
         HashNode<K, V> newNode = new HashNode<>(key, value);
         bucketList.add(newNode);
         size++;
+        checkLF();
+    }
+    private void checkLF() {
+        // check if the load factor exceeds a certain threshold
+        if ((1.0 * size) / numBuckets >= 0.7) {
+            // if so, resize the array and rehash the key-value pairs
+            ArrayList<LinkedList<HashNode<K, V>>> tempBucketArray = bucketArray;
+            bucketArray = new ArrayList<>();
+            numBuckets = 2 * numBuckets;
+            size = 0;
 
+            for (int i = 0; i < numBuckets; i++) {
+                bucketArray.add(new LinkedList<HashNode<K, V>>());
+            }
+
+            for (LinkedList<HashNode<K, V>> bucket : tempBucketArray) {
+                for (HashNode<K, V> node : bucket) {
+                    put(node.key, node.value);
+                }
+            }
+        }
     }
 }
