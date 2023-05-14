@@ -1,7 +1,7 @@
 public class MyTestingClass {
     private int key;
     private String value;
-    private MyTestingClass(int key){
+    public MyTestingClass(int key){
         this.key = key;
     }
 
