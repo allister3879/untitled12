@@ -70,4 +70,20 @@ public class MyHashTable<K, V> {
             }
         }
     }
+
+    public V get(K key) {
+        int bucketIndex = hash(key);
+        LinkedList<HashNode<K, V>> bucketList = bucketArray.get(bucketIndex);
+
+        // iterate over the linked list in the appropriate bucket
+        for (HashNode<K, V> node : bucketList) {
+            // if the key is found, return its corresponding value
+            if (node.key.equals(key)) {
+                return node.value;
+            }
+        }
+
+        // if the key is not found, return null
+        return null;
+    }
 }
