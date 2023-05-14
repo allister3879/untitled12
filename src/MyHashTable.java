@@ -32,4 +32,22 @@ public class MyHashTable<K, V> {
         int index = Math.abs(hashCode) % numBuckets; // hash algorithm
         return index;
     }
+    public void put(K key, V value) {
+        int bucketIndex = hash(key);
+        LinkedList<HashNode<K, V>> bucketList = bucketArray.get(bucketIndex);
+
+        // check if the key already exists in the hash table
+        for (HashNode<K, V> node : bucketList) {
+            if (node.key.equals(key)) {
+                node.value = value;
+                return;
+            }
+        }
+
+        // if the key doesn't exist, add a new node to the bucket list
+        HashNode<K, V> newNode = new HashNode<>(key, value);
+        bucketList.add(newNode);
+        size++;
+
+    }
 }
