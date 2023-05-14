@@ -102,4 +102,15 @@ public class MyHashTable<K, V> {
         // if the key is not found, return null
         return null;
     }
+    public boolean contains(V value) {
+        for (LinkedList<HashNode<K, V>> bucketList : bucketArray) {
+            for (HashNode<K, V> node : bucketList) {
+                if (node.value.equals(value)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
