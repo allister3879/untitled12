@@ -24,4 +24,12 @@ public class MyHashTable<K, V> {
             bucketArray.add(new LinkedList<HashNode<K, V>>());
         }
     }
+
+    // methods >>>
+
+    private int hash(K key) {
+        int hashCode = key.hashCode();
+        int index = Math.abs(hashCode) % numBuckets; // hash algorithm
+        return index;
+    }
 }
