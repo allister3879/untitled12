@@ -49,7 +49,7 @@ public class MyHashTable<K, V> {
         HashNode<K, V> newNode = new HashNode<>(key, value);
         bucketList.add(newNode);
         size++;
-        resize();
+        reSize();
     }
 
     public V get(K key) {
@@ -111,7 +111,7 @@ public class MyHashTable<K, V> {
         LinkedList<HashNode<K, V>> bucketList = bucketArray.get(index);
         return bucketList.size();
     }
-    private void resize() {
+    private void reSize() {
         // check if the load factor exceeds a certain threshold
         if ((1.00 * size) / numBuckets >= 0.75) {
             // if so, resize the array and rehash the key-value pairs
