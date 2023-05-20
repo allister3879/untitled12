@@ -49,7 +49,7 @@ public class MyHashTable<K, V> {
         HashNode<K, V> newNode = new HashNode<>(key, value);
         bucketList.add(newNode);
         size++;
-        checkLF();
+        resize();
     }
 
     public V get(K key) {
