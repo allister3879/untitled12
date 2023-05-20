@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 public class MyHashTable<K, V> {
     private ArrayList<LinkedList<HashNode<K, V>>> bucketArray;
+    private ArrayList<LinkedList<HashNode<K, V>>> bucketArray2;
     private int numBuckets;
     private int size;
     private class HashNode<K, V> {
@@ -49,26 +50,6 @@ public class MyHashTable<K, V> {
         bucketList.add(newNode);
         size++;
         checkLF();
-    }
-    private void checkLF() {
-        // check if the load factor exceeds a certain threshold
-        if ((1.0 * size) / numBuckets >= 0.7) {
-            // if so, resize the array and rehash the key-value pairs
-            ArrayList<LinkedList<HashNode<K, V>>> tempBucketArray = bucketArray;
-            bucketArray = new ArrayList<>();
-            numBuckets = 2 * numBuckets;
-            size = 0;
-
-            for (int i = 0; i < numBuckets; i++) {
-                bucketArray.add(new LinkedList<HashNode<K, V>>());
-            }
-
-            for (LinkedList<HashNode<K, V>> bucket : tempBucketArray) {
-                for (HashNode<K, V> node : bucket) {
-                    put(node.key, node.value);
-                }
-            }
-        }
     }
 
     public V get(K key) {
@@ -130,4 +111,25 @@ public class MyHashTable<K, V> {
         LinkedList<HashNode<K, V>> bucketList = bucketArray.get(index);
         return bucketList.size();
     }
+    private void resize() {
+        // check if the load factor exceeds a certain threshold
+        if ((1.00 * size) / numBuckets >= 0.75) {
+            // if so, resize the array and rehash the key-value pairs
+            ArrayList<LinkedList<HashNode<K, V>>> tempBucketArray = bucketArray;
+            bucketArray = new ArrayList<>();
+            numBuckets = 2 * numBuckets;
+            size = 0;
+
+            for (int i = 0; i < numBuckets; i++) {
+                bucketArray.add(new LinkedList<HashNode<K, V>>());
+            }
+
+            for (LinkedList<HashNode<K, V>> bucket : tempBucketArray) {
+                for (HashNode<K, V> node : bucket) {
+                    put(node.key, node.value);
+                }
+            }
+        }
+    }
+
 }
